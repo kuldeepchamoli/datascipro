@@ -2,7 +2,8 @@ from src.datascipro.constants import  *
 from src.datascipro.utils.common import read_yaml,create_directories
 from pathlib import Path
 
-from src.datascipro.entity.config_entity import (DataIngestionConfig)
+from src.datascipro.entity.config_entity import (DataIngestionConfig,DataValidationConfig)
+
 
 class ConfigurationManager:
     def __init__(self,
@@ -17,7 +18,7 @@ class ConfigurationManager:
         #self.params = read_yaml(params_filepath)   # Load model/experiment params
         #self.schema = read_yaml(schema_filepath)   # Load data schema
         from pathlib import Path
-
+        from src.datascipro.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH, SCHEMA_FILE_PATH
         self.config = read_yaml(Path(config_filepath))
         self.params = read_yaml(Path(params_filepath))
         self.schema = read_yaml(Path(schema_filepath))
@@ -41,3 +42,19 @@ class ConfigurationManager:
             unzip_dir=config.unzip_dir
         )
         return data_ingestion_config
+    
+    def get_data_validation_config(self) -> DataValidationConfig:
+        config = self.config.data_validation
+        schema=self.schema.COLUMNS
+
+        create_directories([config.root_dir])
+
+        data_validation_config = DataValidationConfig(
+            root_dir=config.root_dir,
+            STATUS_FILE=config.STATUS_FILE,
+            unzip_data_dir = config.unzip_data_dir,
+            all_schema=schema
+        )
+
+        return data_validation_config
+
