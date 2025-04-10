@@ -29,4 +29,3 @@ class DataValidation:
             logger.exception("Error during column presence validation")
             raise e
 
-
