@@ -97,3 +97,17 @@ def load_bin(path: Path) -> Any:
     data = joblib.load(path)
     logger.info(f"Binary file loaded from: {path}")
     return data
+
+@ensure_annotations
+def save_json(path: Path, data: dict):
+    """
+    Saves a dictionary as a JSON file.
+
+    Args:
+        path (Path): Path to save the JSON file.
+        data (dict): Data to save.
+    """
+    with open(path, "w") as f:
+        json.dump(data, f, indent=4)
+
+    logger.info(f"JSON file saved at: {path}")
