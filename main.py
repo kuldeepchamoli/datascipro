@@ -2,6 +2,7 @@ from src.datascipro import logger
 from src.datascipro.pipeline.data_ingestion_pipeline import DataIngestionTrainingPipeline
 from src.datascipro.pipeline.data_validation_pipeline import DataValidationTrainingPipeline
 from src.datascipro.pipeline.data_transformation_pipeline import DataTransformationTrainingPipeline
+from src.datascipro.pipeline.model_trainer_pipeline import ModelTrainerTrainingPipeline 
 
 STAGE_NAME = "Data Ingestion Stage"  # ✅ define the stage name
 
@@ -33,6 +34,16 @@ try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<")  # ✅ use f-string for interpolation
     data_transformation = DataTransformationTrainingPipeline()
     data_transformation.initiate_data_transformation()
+    logger.info(f">>>>> stage {STAGE_NAME} COMPLETED <<<<\n\n<<<<")
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Model Trainer Stage"
+try:
+    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<")  # ✅ use f-string for interpolation
+    model_train = ModelTrainerTrainingPipeline()
+    model_train.initiate_model_training()
     logger.info(f">>>>> stage {STAGE_NAME} COMPLETED <<<<\n\n<<<<")
 except Exception as e:
     logger.exception(e)
