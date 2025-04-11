@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/form-v9.css') }}">
+    <style>
+        .result-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 60%;
+            margin: auto;
+        }
+
+        .result-box h1 {
+            font-size: 32px;
+            color: #333;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #6c5ce7;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: #4834d4;
+        }
+    </style>
+</head>
+<body class="form-v9">
+    <div class="page-content">
+        <div class="form-v9-content" style="background-image: url('{{ url_for('static', filename='assets/img/form-v9.jpg') }}');">
+            <div class="result-box">
+                <h1>Predicted Wine Quality: {{ prediction }}</h1>
+                <a class="back-btn" href="/">Go Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
